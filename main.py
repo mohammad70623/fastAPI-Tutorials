@@ -22,6 +22,17 @@ class Patient(BaseModel):
         return bmi 
     
 
+    @computed_field
+    @property
+    def verdict(self)->str:
+        if self.bmi < 18.5:
+            return 'UnderWeight'
+        elif self.bmi < 25:
+            return 'Normal'
+        elif self.bmi < 30:
+            return 'Normal'
+        else:
+            return 'Obese'
 
 
 def load_data():
