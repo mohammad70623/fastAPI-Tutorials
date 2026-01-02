@@ -25,7 +25,16 @@ class UserInput(BaseModel):
     def bmi(self) ->float:
         return round(self.weight/(self.height**2), 2)
     
-    
+    @computed_field
+    @property
+    def lifestyle_risk(self) -> str:
+        if self.smoker and self.bmi > 30:
+            return "high"
+        elif self.smoker or self.bmi >27:
+            return "medium"
+        else:
+            return "low"
+
 
 
 
