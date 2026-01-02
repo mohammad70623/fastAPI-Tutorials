@@ -20,6 +20,13 @@ class UserInput(BaseModel):
     city:  Annotated[str, Field(..., description='the city of users belongs to')]
     occupation: Annotated[Literal['retired', 'freelancer', 'student', 'government_job', 'business_owner', 'unemployed', 'private_job'], Field(..., description='Occupation of the users')]
 
+    @computed_field
+    @property
+    def bmi(self) ->float:
+        return round(self.weight/(self.height**2), 2)
+    
+    
+
 
 
     
