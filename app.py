@@ -34,6 +34,20 @@ class UserInput(BaseModel):
             return "medium"
         else:
             return "low"
+        
+    @computed_field
+    @property
+    def age_group(self) -> str:
+        if self.age < 25:
+            return "young"
+        elif self.age <45:
+            return "Adult"
+        elif self.age < 60:
+            return "middle_aged"
+        return "senior"
+    
+    
+
 
 
 
