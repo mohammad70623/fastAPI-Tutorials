@@ -66,6 +66,19 @@ class UserInput(BaseModel):
             return 2
         else:
             return 3
+        
+@app.post('/predict')
+def predict_premium(data: UserInput):
+
+    input_df = pd.DataFrame([{
+        'bmi': data.bmi,
+        'age_group': data.age_group,
+        'lifestyle_risk': data.lifestyle_risk,
+        'city_tier': data.city_tier, 
+        'income_lpa': data.income_lpa, 
+        'occupation': data.occupation
+    }])
+    
     
 
 
