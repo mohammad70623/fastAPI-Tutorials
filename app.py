@@ -53,20 +53,21 @@ class UserInput(BaseModel):
         if self.age < 25:
             return "young"
         elif self.age <45:
-            return "Adult"
+            return "adult"
         elif self.age < 60:
             return "middle_aged"
         return "senior"
     
-    @computed_field 
+    @computed_field
     @property
-    def city_tier(self) ->int:
+    def city_tier(self) -> int:
         if self.city in tier_1_cities:
             return 1
         elif self.city in tier_2_cities:
             return 2
         else:
             return 3
+
         
 @app.post('/predict')
 def predict_premium(data: UserInput):
