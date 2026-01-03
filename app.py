@@ -1,11 +1,12 @@
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, computed_field, Field 
 from typing import Literal, Annotated
 import pickle 
 import pandas as pd
 
 #import the ML model 
-with open('model.pkl', 'rb') as f:
+with open('insurance_premium_model.pkl', 'rb') as f:
     model = pickle.load(f)
 
 app = FastAPI()
@@ -78,8 +79,10 @@ def predict_premium(data: UserInput):
         'income_lpa': data.income_lpa, 
         'occupation': data.occupation
     }])
-    
-    
+
+    prediction = model.predict(input_df)[0]
+
+    return JSONResponse(status_code=200, content={'predicted_category': prediction})
 
 
 
